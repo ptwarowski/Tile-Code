@@ -2,9 +2,14 @@ const path = require("path");
 const entryPath = "";
 
 module.exports = {
-  entry: `./${entryPath}/js/app.js`,
+  entry: {
+    app: `./${entryPath}/js/drawPlan.js`,
+    drawWalls: `./${entryPath}/js/drawWalls.js`,
+    addTile: `./${entryPath}/js/addTile.js`,
+    putTiles: `./${entryPath}/js/putTiles.js`,
+  },
   output: {
-    filename: "out.js",
+    filename: "[name].out.js",
     path: path.resolve(__dirname, `${entryPath}/build`)
   },
   devServer: {
@@ -20,7 +25,31 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: "babel-loader"
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        exclude: /node_modules/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader"
+        ],
+      },
+      {
+        test: /\.(jpe?g|gif|png|svg)$/,
+        loader: "file-loader",
+        options: {
+          name: "[name].[ext]",
+          publicPath: "/img/",
+          outputPath: "/img/"
+        }
       }
     ]
-  }
+  },
+  watch: true
 };

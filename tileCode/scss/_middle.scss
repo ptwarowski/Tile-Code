@@ -1,0 +1,270 @@
+
+.middleSection {
+    width: 100vw;
+    height: calc(100vh - 110px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    
+    margin-bottom: auto;
+    margin-top: auto;
+    color: $header;
+    line-height: calc(65vh);
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 60px;
+    text-shadow: 0 3px 3px $buttons;
+    a{
+    text-decoration: none;
+    color: $header;
+    }
+    :hover{
+        text-shadow: 0 3px 10px $buttons;
+    }
+}
+
+h2 {
+    
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 24px;
+    text-shadow: 0 3px 3px $buttons;
+    text-decoration: none;
+    color: $header;
+}
+
+.planSVG{
+    width:70vw;
+    height: 60vh;
+}
+
+#planStrong{
+    filter: drop-shadow(0px 0px 10px $gold);
+    
+}
+#root{
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 100vh;
+}
+
+
+#wallLength {
+    font-size: 18px;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border: none;
+    &::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+     margin: 0;
+    }
+    &::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+         margin: 0;
+        }
+}
+
+.viewSVG {
+    margin:30px auto 0 auto;
+    max-height: 70vh;
+}
+
+#formDraw {
+    opacity: 0.8;
+}
+
+.upPlanButton, .leftPlanButton, .rightPlanButton, .downPlanButton{
+    @include triangle;
+    position: relative;
+     
+    
+}
+
+.upPlanButton {
+    &::before{
+        top:-21px;
+    }
+}
+
+.leftPlanButton {
+    &::before{
+        transform: rotate(-90deg);
+        top:-15px;
+        left:0px;
+    }
+}
+.rightPlanButton {
+    &::before{
+        transform: rotate(90deg);
+        top:-15px;
+        right:0px;
+    }
+
+}
+.downPlanButton {
+    &::before{
+        transform: rotate(180deg);
+        top: -7px;
+    }
+}
+p span{
+    color: $gold;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.tools{
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    left: 320px;
+    position: relative;
+    bottom: 120px;
+    
+}
+.buttonsBox {
+    display:flex;
+    flex-direction: column;
+    margin-left: 20px;
+    & button {
+        @include buttons
+
+    }
+}
+.saveBox{
+    @include boxShadow;
+    
+    height: 170px;
+    width: 500px;
+    background-color: $base_color;
+    border: 1px solid $buttons;
+    position: absolute;
+    left: 50vw;
+    top: 50vh;
+    transform: translate(-250px,-85px);
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & saveBoxButtons{
+        margin: 15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    & button{
+        @include buttons;
+        height: 30px;
+        width: 143px;
+        border: none;
+    &:first-child {
+        border-radius: 3px 0 0 3px;
+    }
+    &:last-child {
+        border-radius: 0 3px 3px 0;
+    }
+
+    }
+
+}
+.planBox{
+    margin: 20px auto 0 auto;
+
+    position: relative;
+    width: $section_width;
+}
+.leftWallBtn, .rightWallBtn{
+    @include triangle;
+    position: absolute;
+    opacity: 0.5;
+} 
+.leftWallBtn{
+    top: 150px; 
+    left: 300px;
+    &::before{
+        transform: rotate(-90deg);
+        top:-15px;
+        left:0px;
+    }
+}
+.rightWallBtn{
+    top: 150px; 
+    right: 140px;
+    &::before{
+        transform: rotate(90deg);
+        top:-15px;
+        left:0px;
+    }
+}
+
+.selectBox{
+    width: $width;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.formTileSection{
+    width: $section_width;
+    display:flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+
+    input {
+        margin: 5px 0;
+        width: 170px;
+        height: 25px;
+        text-align: right;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border: none;
+        &::-webkit-outer-spin-button{
+            -webkit-appearance: none;
+             margin: 0;
+            }
+        &::-webkit-inner-spin-button{
+            -webkit-appearance: none;
+            margin: 0;
+                }
+    }
+    p {
+        font-size: 20px;
+    }
+    .tileform{
+        width: $section_width;
+        margin:10px auto;
+        display:flex;
+        flex-direction: row; 
+        justify-content: space-between;  
+        div {
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+            text-align: left;
+            button {
+            @include buttons;
+            border-radius: 3px;
+            height: 25px;
+            width: 170px;
+            font-weight: 700;
+            margin-top: 25px
+            }
+        }
+    }
+}
+.svgTileSection {
+    margin: 40px auto 0 auto;
+    width: $section_width;
+    font-size: 20px;
+    text-align: center;
+}
+    
