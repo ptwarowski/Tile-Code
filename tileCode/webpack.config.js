@@ -7,6 +7,7 @@ module.exports = {
     drawWalls: `./${entryPath}/js/drawWalls.js`,
     addTile: `./${entryPath}/js/addTile.js`,
     putTiles: `./${entryPath}/js/putTiles.js`,
+    calculator: `./${entryPath}/js/calculator.js`,
   },
   output: {
     filename: "[name].out.js",

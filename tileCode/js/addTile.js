@@ -40,7 +40,7 @@ const [tile, setTile] = useState({ID: Date.now(), name: "", width:0, height:0, c
     if (tDisplay) return (
       <section className='svgTileSection'>
         <p>{tile.name}</p>
-        <svg className="tileSVG" viewBox={tileViewBox} style={{padding:20, width:700, height:400}} >
+        <svg className="tileSVG" viewBox={tileViewBox} style={{width:700, height:250}} >
           {Gradient(tile)}
           <rect x={tile.width} y={tile.height} width={tile.width} height={tile.height} stroke={tile.stroke} strokeWidth="0.3" fill="url(#gradient)" />
           <rect x={tile.width} y="0" width={tile.width} height={tile.height} stroke={tile.stroke} strokeWidth="0.3" fill="url(#gradient)" />

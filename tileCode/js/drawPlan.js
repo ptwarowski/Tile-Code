@@ -23,7 +23,13 @@ let yTotal=0;
 let sortedX = [0];
 let sortedY = [0];
 let myStorage = window.localStorage;
-let arrayToSave=[];
+
+let objToSave={
+  id: '',
+  arrayToSave: [],
+  svgViewBox:''
+};
+
 
 function App() {
   const [plan, setPlan] = useState(['M 0 0']);
@@ -63,14 +69,14 @@ function App() {
   
 
   const handleUndo = () => {
-    if (plan!='M 0 0') {
+    if (plan != 'M 0 0') {
     ((xCoOrdinates.length > 1) & (xCount === xCoOrdinates[xCoOrdinates.length-1])) && xCoOrdinates.splice(xCoOrdinates.length-1,1); 
     ((yCoOrdinates.length > 1) & (yCount === yCoOrdinates[yCoOrdinates.length-1])) && yCoOrdinates.splice(yCoOrdinates.length-1,1); 
     ((xCoOrdinates.length > 1) & (xCount === xCoOrdinates[0])) && xCoOrdinates.splice(0,1);
     ((yCoOrdinates.length > 1) & (yCount === yCoOrdinates[0])) && yCoOrdinates.splice(0,1);
     
-    if (xCoOrdinates.length===1) {xCount=0};
-    if (yCoOrdinates.length===1) {yCount=0};
+    xCoOrdinates.length === 1 && (xCount = 0);
+    yCoOrdinates.length === 1 && (yCount = 0);
 
     plan.pop();
     
@@ -97,7 +103,7 @@ function App() {
     if (plan[plan.length-1]=== ' L 0 0') {
         plan.length=plan.length-1;
         setPlan((prevState)=>prevState + ` Z`);
-        console.log(plan)
+        
     } else {
     setPlan((prevState)=>prevState + ` Z`);}
     
@@ -120,27 +126,18 @@ function App() {
       }
     }
     
-    arrayToSave=[...array, "Z"].join(" ");
+    objToSave={
+      id: '',
+      arrayToSave: [...array, "Z"].join(" "),
+      svgViewBox: `${(sortedX[0]-30)} ${(sortedY[0]-30)} ${xTotal>140 ? xTotal+60: 200} ${yTotal>140 ? yTotal+60: 200}`
+    }
   }
 
 
-  const handleSavePlan = () => {
-    
-    myStorage.setItem(`svg ${Date.now()}`, arrayToSave); 
+  const handleSavePlan = () => { 
+    myStorage.setItem(`svg ${Date.now()}`, JSON.stringify(objToSave)); 
+    window.location.reload();
 
-    setDisplay(false);  
-    xCount = 0;
-    yCount = 0;
-    xCoOrdinates = [0];
-    yCoOrdinates = [0];
-    svgFill = 'none';
-    svgStroke = 1;
-    svgViewBox = `-10 -10 200 200`
-    xTotal=0;
-    yTotal=0;
-    sortedX = [0];
-    sortedY = [0];
-    setPlan(['M 0 0']);  
   };
   
 

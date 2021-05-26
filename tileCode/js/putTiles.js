@@ -94,7 +94,7 @@ const onSVGPlanChange = (e) => {
   
   e.preventDefault()
 }
-console.log(positionArr)
+
 
 
 const onTileChange= (e) => {  
@@ -164,23 +164,22 @@ const miniSVG = (displaySVG) => {if (displaySVG)  return (
 
 function drawWallsSVG(displaySVG) {
 
+  startPathArr=[];
+  wallPathArr=[];
 
-startPathArr=[];
-wallPathArr=[];
-
-let z;
-  for (z=0; z<lengthArray.length; z++) {
+  let z;
+    for (z=0; z<lengthArray.length; z++) {
     svgFillArr.push('none');
-  }
+  };
 
-let i;
-for (i=1; i<lengthArray.length+1; i++) {
+  let i;
+  for (i=1; i<lengthArray.length+1; i++) {
         
-  startPathArr=[...startPathArr, <path key={i-1} id={`startWallPath${i-1}`} d={`M ${startXArr[i-1]} 0 L ${lengthArray[i-1]+startXArr[i-1]} 0`}  stroke="goldenrod" strokeWidth={svgStroke2} fill={svgFillArr[wallNumber]} filter="url(#f1)" />];
+    startPathArr=[...startPathArr, <path key={i-1} id={`startWallPath${i-1}`} d={`M ${startXArr[i-1]} 0 L ${lengthArray[i-1]+startXArr[i-1]} 0`}  stroke="goldenrod" strokeWidth={svgStroke2} fill={svgFillArr[wallNumber]} filter="url(#f1)" />];
       
-  wallPathArr=[...wallPathArr, <path key={i-1} id={`wallPath${i-1}`} d={`M ${startXArr[i-1]} 0 L ${lengthArray[i-1]+startXArr[i-1]} 0 ${wallsSVG[i-1].join(' ')}`}  stroke='black' strokeWidth={svgStroke2} fill="url(#tile)"/>];;
+    wallPathArr=[...wallPathArr, <path key={i-1} id={`wallPath${i-1}`} d={`M ${startXArr[i-1]} 0 L ${lengthArray[i-1]+startXArr[i-1]} 0 ${wallsSVG[i-1].join(' ')}`}  stroke='black' strokeWidth={svgStroke2} fill="url(#tile)"/>];
         
-  }
+  };
   
 if (displaySVG) {
     return (
@@ -217,14 +216,13 @@ if (displaySVG) {
 }
 const onXPositionChange = (x) => {
   positionArr[wallNumber][0]=parseInt(x.target.value);
-  console.log(positionArr[wallNumber][1])
-  setChange(p=>!p)
-
+  console.log(positionArr);
+  setChange(p=>!p);
 }
 const onYPositionChange = (y) => {
   positionArr[wallNumber][1]=parseInt(y.target.value);
-  console.log(positionArr[wallNumber][1])
-  setChange(p=>!p)
+  console.log(positionArr);
+  setChange(p=>!p);
 }
 
 return (
