@@ -3,6 +3,8 @@ import "../scss/app.scss";
 import ReactDOM from "react-dom";
 import React, { useState } from "react";
 
+import {calculate} from "./calculator";
+
 let svgViewBox = `-80 -80 600 420`
 let svgFill = "gainsboro";
 let svgStroke = 6;
@@ -13,6 +15,7 @@ let startXArr=[];
 let x=0;
 let y=0;
 
+
 let tile = {
 id: '',
 name: '',
@@ -21,6 +24,7 @@ height: 0,
 stroke: '',
 color: '',
 };
+
 
 let svgFillArr = [];
 let svgStroke2 = 1;
@@ -40,6 +44,7 @@ const [line, setLine] = useState([]);
 const [valueSVG, setValueSVG] = useState('');
 const [wallNumber, setWallNumber] = useState(0);
 const [change, setChange]=useState(false);
+const [amount, setAmount]=useState(0);
 
 const options = [];
 const optionsTile = [];
@@ -69,6 +74,8 @@ for (let i=0; i<myStorage.length; i++)
     
   };
 
+////
+
 const onSVGPlanChange = (e) => {
   setValueSVG(modelObjectArr[e.target.value].planSVG);
   setWallNumber(0);
@@ -95,7 +102,7 @@ const onSVGPlanChange = (e) => {
   e.preventDefault()
 }
 
-
+//////
 
 const onTileChange= (e) => {  
   tile = {
@@ -118,6 +125,8 @@ const onTileChange= (e) => {
   e.preventDefault()
 }
 
+///
+
 const handleLeftWallBtn = () => {
   
   const nWallNumber = wallNumber -1;   
@@ -131,6 +140,8 @@ const handleLeftWallBtn = () => {
   }
 }
 
+/////
+
 const handleRightWallBtn = () => {
   const nWallNumber = wallNumber + 1;  
     if (nWallNumber === line.length) {
@@ -142,6 +153,8 @@ const handleRightWallBtn = () => {
       svgViewBox2 = `${startXArr[nWallNumber]} -330 ${lengthArray[nWallNumber]} 360` 
     }
 }
+
+//////
 
 const miniSVG = (displaySVG) => {if (displaySVG)  return (
     <svg className="planMiniSVG" viewBox={svgViewBox} style={{width:150, height:300}} >
@@ -158,9 +171,7 @@ const miniSVG = (displaySVG) => {if (displaySVG)  return (
     </svg>
 )}
 
-
-
-
+//////
 
 function drawWallsSVG(displaySVG) {
 
@@ -214,11 +225,17 @@ if (displaySVG) {
     )
   }
 }
+
+//////
+
 const onXPositionChange = (x) => {
   positionArr[wallNumber][0]=parseInt(x.target.value);
   console.log(positionArr);
   setChange(p=>!p);
 }
+
+///////
+
 const onYPositionChange = (y) => {
   positionArr[wallNumber][1]=parseInt(y.target.value);
   console.log(positionArr);
@@ -233,7 +250,7 @@ return (
     <form>
       <h2>Select Plan:</h2>
       <select onChange={onSVGPlanChange}>
-        <option disabled selected value> -- Select Plan -- </option>
+        <option defaultValue> -- Select Plan -- </option>
           {options.map((item) => <option key={item.ID} value={item.value} >{item.ID}</option>)}
       </select>
     </form> 
@@ -242,7 +259,7 @@ return (
     <form>
       <h2>Select Tile:</h2>
       <select onChange={onTileChange}>
-        <option disabled selected value> -- Select Tile -- </option>
+        <option defaultValue> -- Select Tile -- </option>
         {optionsTile.map((item) => <option key={item.ID} value={item.value} >{item.ID}</option>)}
       </select>
     </form> 
@@ -252,6 +269,7 @@ return (
     {miniSVG(displaySVG)}
        
     {drawWallsSVG(displaySVG, wallNumber)}
+    
   </div>
     {
     (positionArr[wallNumber]) && (
@@ -263,6 +281,9 @@ return (
         <input type="range" step={1} id="volumeY" name="positionY" value={positionArr[wallNumber][1]}
         min={0} max={tile.height} onChange={(y)=>onYPositionChange(y)}></input>
       </div>
+      <button className={(tile.height!=0 & wallPathArr.length>0) ? "calc__btn calc__btn__pos" : "disabled calc__btn__pos"} onClick={event=>setAmount(calculate(lengthArray, wallsSVG, startXArr, tile, positionArr))}> Calculate </button>
+      <br/>
+      {amount>0 && <p className='result'>You will need <span>{amount}</span> tiles.</p>}
     </>)
     }
   

@@ -9,7 +9,7 @@ let yCount = 0;
 let xCoOrdinates = [0];
 let yCoOrdinates = [0];
 let svgFill = 'none';
-let svgStroke = (xTotal+yTotal)/100;
+let svgStroke = Math.floor((xTotal+yTotal)/100);
 let svgViewBox = `-10 -10 200 200`
 let svgStyle = {
   padding:10, 
@@ -22,7 +22,7 @@ let xTotal=0;
 let yTotal=0;
 let sortedX = [0];
 let sortedY = [0];
-let myStorage = window.localStorage;
+const myStorage = window.localStorage;
 
 let objToSave={
   id: '',
@@ -30,6 +30,7 @@ let objToSave={
   svgViewBox:''
 };
 
+/////
 
 function App() {
   const [plan, setPlan] = useState(['M 0 0']);
@@ -67,6 +68,7 @@ function App() {
   }
   }
   
+  //////
 
   const handleUndo = () => {
     if (plan != 'M 0 0') {
@@ -97,6 +99,7 @@ function App() {
     }
   };
 
+////
 
   const handleDone = () => {
     setDisplay(true);
@@ -133,6 +136,7 @@ function App() {
     }
   }
 
+  ///////
 
   const handleSavePlan = () => { 
     myStorage.setItem(`svg ${Date.now()}`, JSON.stringify(objToSave)); 
@@ -140,6 +144,7 @@ function App() {
 
   };
   
+  /////
 
   const handleReset = () => {
     setDisplay(false);
@@ -157,6 +162,7 @@ function App() {
     setPlan(['M 0 0']);
   };
 
+  /////
 
   let displayDrawBox = ({display}) => {
     if(!display) {return (
@@ -192,6 +198,7 @@ function App() {
     )}
   }
 
+  /////
 
   let displaySaveBox = ({display}) => {
     
@@ -206,6 +213,7 @@ function App() {
     }
   }
   
+  //////
 
   return (
     <>

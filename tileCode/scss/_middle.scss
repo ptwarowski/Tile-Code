@@ -109,7 +109,7 @@ h2 {
 .downPlanButton {
     &::before{
         transform: rotate(180deg);
-        top: -7px;
+        top: -8px;
     }
 }
 p span{
@@ -132,9 +132,10 @@ p span{
     display:flex;
     flex-direction: column;
     margin-left: 20px;
+    width: auto;
     & button {
-        @include buttons
-
+        @include buttons;
+        width: auto;
     }
 }
 .saveBox{
@@ -174,11 +175,71 @@ p span{
     }
 
 }
+label {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    input {
+        margin-left: 50px;
+        width: 70px;
+        height: 1.2rem;
+        text-align: right;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border: 1px solid $buttons;
+        &::-webkit-outer-spin-button{
+            -webkit-appearance: none;
+             margin: 0;
+            }
+        &::-webkit-inner-spin-button{
+            -webkit-appearance: none;
+            margin: 0;
+                }
+    }
+}
 .planBox{
     margin: 20px auto 0 auto;
 
     position: relative;
     width: $section_width;
+    .saveBox, .addBox {
+        @include boxShadow;
+        
+        
+        background-color: $base_color;
+        border: 1px solid $buttons;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        
+        font-size: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        & saveBoxButtons{
+            margin: 15px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+    .saveBox {
+        height: 170px;
+        width: 500px;
+        transform: translate(-250px,-85px);
+    }
+    .addBox {
+        height: auto;
+        width: 300px;
+        padding: 20px;
+        transform: translate(-30%,-100px);
+        h5 {
+            margin-bottom: 20px;
+        }
+    }
 }
 .leftWallBtn, .rightWallBtn{
     @include triangle;
@@ -267,4 +328,23 @@ p span{
     font-size: 20px;
     text-align: center;
 }
+.calc__btn {
+    @include buttons;
     
+    
+}  
+.calc__btn__pos {
+    @include buttons;
+    height: auto;
+    width: auto;
+    padding: 10px;
+    left:0;
+    top:0;
+}
+.result {
+    margin: 1rem;
+    font-size: 1.5rem;
+    span{
+    font-size: 2rem;  
+    }
+}
